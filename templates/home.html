@@ -1,0 +1,23 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  {% for post in object_list %}
+  <div class="post-entry">
+    <h2><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h2>
+    <p>{{ post.body }}</p>
+
+    Rating:
+    {% if post.ratings.exists %}
+      {{ post.ratings.last.value }}
+    {% else %}
+      <p>No rating yet.</p>
+    {% endif %}
+    <br>
+    <a href="{% url 'post_edit' pk=post.pk %}">Edit</a>
+    <br>
+    <a href="{% url 'post_delete' pk=post.pk %}">Delete</a>
+  </div>
+  {% endfor %}
+  <a href="{% url 'new_post' %}">Add new post</a>
+{% endblock content %}

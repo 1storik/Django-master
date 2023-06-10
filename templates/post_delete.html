@@ -1,0 +1,12 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Delete Post?</h1>
+  <p>Are you sure you want to delete "{{ object.title }}"?</p>
+  <form method="post">
+    {% csrf_token %}
+    <input type="submit" value="Yes, Delete">
+    <a href="{% url 'post_detail' object.pk %}">Cancel</a>
+  </form>
+{% endblock content %}
